@@ -1,0 +1,41 @@
+<!-- Back button -->
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="home"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Clinic Info - Therapist</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-list>
+        <ion-list-header>Interface Options</ion-list-header>
+
+        <ion-item>
+          <ion-label>Clinic</ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptionsClinic" interface="action-sheet" placeholder="Select One">
+            <ion-select-option value="UAMS">UAMS</ion-select-option>
+            <ion-select-option value="NWA">NWA</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Therapist</ion-label>
+            <ion-select [interfaceOptions]="customActionSheetOptionsTherapist" interface="action-sheet" placeholder="Select One">
+              <ion-select-option value="Thep1">Therapist 1</ion-select-option>
+              <ion-select-option value="Thep2">Therapist 2</ion-select-option>
+            </ion-select>
+          </ion-item>
+      
+      </ion-list>
+
+
+
+</ion-content>
