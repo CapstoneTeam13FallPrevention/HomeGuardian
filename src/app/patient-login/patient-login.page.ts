@@ -12,4 +12,14 @@ export class PatientLoginPage implements OnInit {
   ngOnInit() {
   }
 
+  customActionSheetOptionsClinic: any = {
+    header: 'Clinic',
+    subHeader: 'Select your Clinic'
+  }
+
+  customActionSheetOptionsTherapist: any = {
+    header: 'Therapist',
+    subHeader: 'Select your Therapist'
+  }
+
 }
