@@ -1,6 +1,8 @@
 {
   "name": "HomeGuardian",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "9efde59a"
 }
