@@ -6,6 +6,9 @@ const routes: Routes = [
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'patient-login', loadChildren: './patient-login/patient-login.module#PatientLoginPageModule' },
   { path: 'therapist-login', loadChildren: './therapist-login/therapist-login.module#TherapistLoginPageModule' },  { path: 'patient-info', loadChildren: './patient-info/patient-info.module#PatientInfoPageModule' },
+  { path: 'user-agreement', loadChildren: './user-agreement/user-agreement.module#UserAgreementPageModule' },
+  { path: 'user-survey', loadChildren: './user-survey/user-survey.module#UserSurveyPageModule' },
+  { path: 'disclaimer', loadChildren: './disclaimer/disclaimer.module#DisclaimerPageModule' },
 
 ];
 
