@@ -32,7 +32,7 @@
             </ion-select>
           </ion-item>
       
-      </ion-list>
+    </ion-list>
 
       <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
         <ion-row>
@@ -51,6 +51,7 @@
             <button ion-button class="submit-btn" full type="submit"
                     [disabled]="!loginForm.form.valid">Login
             </button>
+            <ion-button expand="block" fill="outline" href="/patient-info">Patient Info</ion-button>
           </ion-col>
         </ion-row>
       </form>
