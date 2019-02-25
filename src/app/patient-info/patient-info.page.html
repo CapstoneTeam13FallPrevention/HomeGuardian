@@ -25,7 +25,12 @@
             </ion-item>
 
             <ion-item>
-                <ion-label>Date of Brith</ion-label>
+                <ion-input placeholder="Patient Name" name="name" id="loginField"
+                            type="text" required [(ngModel)]="name" ></ion-input>
+              </ion-item>
+
+            <ion-item>
+                <ion-label>Date of Birth</ion-label>
                 <ion-datetime display-format="MMM DD, YYYY"></ion-datetime>
             </ion-item>
 
