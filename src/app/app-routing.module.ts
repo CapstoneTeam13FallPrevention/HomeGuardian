@@ -10,6 +10,9 @@ const routes: Routes = [
   { path: 'user-survey', loadChildren: './user-survey/user-survey.module#UserSurveyPageModule' },
   { path: 'disclaimer', loadChildren: './disclaimer/disclaimer.module#DisclaimerPageModule' },
   { path: 'privacy-policy', loadChildren: './privacy-policy/privacy-policy.module#PrivacyPolicyPageModule' },
+  { path: 'disclaimer-liability', loadChildren: './disclaimer-liability/disclaimer-liability.module#DisclaimerLiabilityPageModule' },
+  { path: 'disclaimer-policy', loadChildren: './disclaimer-policy/disclaimer-policy.module#DisclaimerPolicyPageModule' },
+  { path: 'terms-and-conditions', loadChildren: './terms-and-conditions/terms-and-conditions.module#TermsAndConditionsPageModule' },
 
 ];
 
