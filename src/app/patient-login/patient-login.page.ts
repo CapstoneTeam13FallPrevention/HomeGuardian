@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {Todo,TodoService} from './../services/todo.service';
+=======
+
+>>>>>>> parent of dbadf1a... patientinformationCollection Firebase
 =======
 
 >>>>>>> parent of dbadf1a... patientinformationCollection Firebase
@@ -9,6 +13,7 @@ import {Todo,TodoService} from './../services/todo.service';
   templateUrl: './patient-login.page.html',
   styleUrls: ['./patient-login.page.scss'],
 })
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -36,6 +41,11 @@ remove(item)
   {
   this.todoService.removeTodo(item.id);
     }
+=======
+export class PatientLoginPage implements OnInit {
+
+  constructor() { }
+>>>>>>> parent of dbadf1a... patientinformationCollection Firebase
 =======
 export class PatientLoginPage implements OnInit {
 
