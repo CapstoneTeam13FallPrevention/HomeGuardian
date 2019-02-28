@@ -6,7 +6,7 @@ import {map} from 'rxjs/operators'
 
 
 
-export interface infor{
+export interface Todo{
   clinic:string;
   therapist: string;
 
@@ -22,15 +22,15 @@ export interface infor{
 export class TodoService implements OnInit {
 
 
-
-  private patientinformationCollection:AngularFirestoreCollection<infor>;
-  private infor:Observable<infor[]>;
+  private patientinformationCollection:AngularFirestoreCollection<Todo>;
+  private todos:Observable<Todo[]>;
 
   constructor(db:AngularFirestore)
    {
-     this.patientinformationCollection =db.collection<infor>('infor');
-     this.infor = this.patientinformationCollection.snapshotChanges().pipe(map(actions=>{
-       return actions .map(a=>{
+     this.patientinformationCollection =db.collection<Todo>('todos');
+
+     this.todos= this.patientinformationCollection.snapshotChanges().pipe(map(actions=>{
+       return actions.map(a=>{
          const data=a.payload.doc.data();
          const id=a.payload.doc.id;
          return {id,...data};
@@ -42,33 +42,27 @@ export class TodoService implements OnInit {
    }
 
 
-getinfor(){
-  return this.infor;
+getTodos()
+  {
+  return this.todos;
 }
 
-getInfor(id)
+getTodo(id)
 {
-  return this.patientinformationCollection.doc<infor>(id).valueChanges();
+  return this.patientinformationCollection.doc<Todo>(id).valueChanges();
 }
-updateinfor(infor:infor, id: string)
+updateTodo(todo:Todo, id: string)
 {
-  return this.patientinformationCollection.doc(id).update(infor);
+  return this.patientinformationCollection.doc(id).update(todo);
 }
-addInfor(infor:infor)
+addTodo(todo:Todo)
 {
-  return this.patientinformationCollection.add(infor);
+  return this.patientinformationCollection.add(todo);
 }
-removeInfor(id)
+removeTodo(id)
 {
   return this.patientinformationCollection.doc(id).delete();
 }
-
-
-
-
-
-
-
 
 
   ngOnInit() {
