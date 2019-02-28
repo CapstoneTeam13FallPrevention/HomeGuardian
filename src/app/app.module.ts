@@ -17,6 +17,7 @@ import { WebView } from '@ionic-native/ionic-webview/ngx'
 import { FilePath } from '@ionic-native/file-path/ngx';
 
 import { IonicStorageModule } from '@ionic/storage'
+
 import {AngularFireModule}    from 'angularfire2';
 import { environment} from '../environments/environment';
 import {AngularFirestoreModule}from'angularfire2/firestore';
@@ -24,7 +25,7 @@ import {AngularFirestoreModule}from'angularfire2/firestore';
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
-  HttpClientModule, IonicStorageModule.forRoot(),AngularFireModule.initializeApp(environment.firebase),AngularFireModule],
+  HttpClientModule, IonicStorageModule.forRoot(),AngularFireModule.initializeApp(environment.firebase),AngularFirestoreModule],
   providers: [
     StatusBar,
     SplashScreen,
