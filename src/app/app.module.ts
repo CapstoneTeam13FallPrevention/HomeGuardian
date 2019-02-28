@@ -18,11 +18,14 @@ import { FilePath } from '@ionic-native/file-path/ngx';
 
 import { IonicStorageModule } from '@ionic/storage'
 
+import {AngularFireModule}    from 'angularfire2';
+import { environment} from '../environments/environment';
+import {AngularFirestoreModule}from'angularfire2/firestore';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
-  HttpClientModule, IonicStorageModule.forRoot()],
+  HttpClientModule, IonicStorageModule.forRoot(),AngularFireModule.initializeApp(environment.firebase),AngularFirestoreModule],
   providers: [
     StatusBar,
     SplashScreen,

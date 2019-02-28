@@ -205,11 +205,11 @@ export class CameraControlPage implements OnInit {
           loading.dismiss();
         })
       ).subscribe(res => {
-        //if (res['success']) {
-          //this.presentToast('File upload complete.')
-        //} else {
-          //this.presentToast('File upload failed.')
-        //}
+        if (res['success']) {
+          this.presentToast('File upload complete.')
+        } else {
+          this.presentToast('File upload failed.')
+        }
       }
       );
   }
