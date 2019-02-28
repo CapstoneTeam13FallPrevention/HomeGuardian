@@ -199,18 +199,18 @@ export class CameraControlPage implements OnInit {
     });
     await loading.present();
 
-    this.http.post("http://localhost:8888/upload.php", formData)
+    this.http.post("http://localhost:8080/upload.php", formData)
       .pipe(
         finalize(() => {
           loading.dismiss();
         })
-      )
-      .subscribe(res => {
-        if (res['success']) {
-          this.presentToast('File upload complete.')
-        } else {
-          this.presentToast('File upload failed.')
-        }
-      });
+      ).subscribe(res => {
+        //if (res['success']) {
+          //this.presentToast('File upload complete.')
+        //} else {
+          //this.presentToast('File upload failed.')
+        //}
+      }
+      );
   }
 }
