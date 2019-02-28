@@ -5,6 +5,13 @@ import {Todo,TodoService} from './../services/todo.service';
   templateUrl: './patient-login.page.html',
   styleUrls: ['./patient-login.page.scss'],
 })
+
+
+
+
+
+
+
 export class PatientLoginPage implements OnInit {
 todos:Todo[];
 
