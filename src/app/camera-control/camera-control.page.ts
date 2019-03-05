@@ -70,7 +70,6 @@ export class CameraControlPage implements OnInit {
       buttons: [{
         text: 'Load from Library',
         handler: () => {
-          this.presentToast('Library Accessed.');
           this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
         }
       },
@@ -78,7 +77,6 @@ export class CameraControlPage implements OnInit {
         text: 'Use Camera',
         handler: () => {
           this.takePicture(this.camera.PictureSourceType.CAMERA);
-          this.presentToast('Camera Accessed.');
         }
       },
       {
@@ -198,19 +196,24 @@ export class CameraControlPage implements OnInit {
       message: 'Uploading image...',
     });
     await loading.present();
+    console.log("Test Console");
 
-    this.http.post("http://localhost:8080/upload.php", formData)
+    this.http.post("http://localhost:8080/index.php", formData)
       .pipe(
         finalize(() => {
           loading.dismiss();
+          //this.presentToast('C2'); //This is called
         })
-      ).subscribe(res => {
-        if (res['success']) {
-          this.presentToast('File upload complete.')
-        } else {
-          this.presentToast('File upload failed.')
-        }
-      }
+      ).subscribe(//res => {
+        //if (res['success']) {
+          //this.presentToast('File upload complete.') //Not called
+        //} else {
+          //this.presentToast('File upload failed.') //Not called
+        //}
+        v => console.log("C3")
+      //}
       );
+
+      //this.presentToast('C1.') //This is called
   }
 }
