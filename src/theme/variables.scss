@@ -3,6 +3,8 @@
 
 /** Ionic CSS Variables **/
 :root {
+  font-size: 120.0%;
+  text-size-adjust: 100%;
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -74,4 +76,9 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  //$toolbar-ios-title-font-size: 1.7rem;
+  //--ion-title-font-size: 9rem;
+  //$toolbar-md-title-font-size: 3rem;
+  //$toolbar-wp-title-font-size: 3.5rem;
 }
