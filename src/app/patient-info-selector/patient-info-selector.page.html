@@ -1,9 +1,22 @@
+<!-- Back button -->
 <ion-header>
   <ion-toolbar>
-    <ion-title>patient-info-selector</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="patient-files"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Patient Information Selector</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+
+  <ion-button shape="round" fill="outline" size="large" href="/patient-info-survey">Patient Survey Answers</ion-button>
+  <h3><strong> </strong></h3>
+  <ion-button shape="round" fill="outline" size="large" href="/patient-info-gallery">Patient Gallery</ion-button>
 
 </ion-content>

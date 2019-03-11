@@ -1,9 +1,32 @@
+<!-- Back button -->
 <ion-header>
   <ion-toolbar>
-    <ion-title>patient-files</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="therapist-login"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Patient Files</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+    <ion-list>
+
+        <ion-item>
+            <ion-label>Patient</ion-label>
+            <ion-select [interfaceOptions]="customActionSheetOptionsPatient" interface="action-sheet" placeholder="Select One">
+              <ion-select-option value="Pati1">Patient 1</ion-select-option>
+              <ion-select-option value="Pati2">Patient 2</ion-select-option>
+            </ion-select>
+          </ion-item>
+      
+    </ion-list>
+
+    <ion-button shape="round" fill="outline" size="large" href="/patient-info-selector">Continue(Temp for Nav)</ion-button>
+
 
 </ion-content>
