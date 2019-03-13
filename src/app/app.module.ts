@@ -18,14 +18,32 @@ import { FilePath } from '@ionic-native/file-path/ngx';
 
 import { IonicStorageModule } from '@ionic/storage'
 
-import {AngularFireModule}    from 'angularfire2';
-import { environment} from '../environments/environment';
-import {AngularFirestoreModule}from'angularfire2/firestore';
+import {FirebaseUIModule, firebase, firebaseui} from 'firebaseui-angular';
+
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
+
+const firebaseUiAuthConfig: firebaseui.auth.Config = {
+  signInFlow: 'popup',
+  signInOptions: [
+    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+  ],
+  tosUrl: '/terms-and-conditions',
+  privacyPolicyUrl: '/privacy-policy',
+  credentialHelper: firebaseui.auth.CredentialHelper.NONE,
+};
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
-  HttpClientModule, IonicStorageModule.forRoot(),AngularFireModule.initializeApp(environment.firebase),AngularFirestoreModule],
+  HttpClientModule, IonicStorageModule.forRoot(),
+  AngularFireModule.initializeApp(environment.firebase),
+  AngularFireAuthModule,
+  FirebaseUIModule.forRoot(firebaseUiAuthConfig)
+  ],
   providers: [
     StatusBar,
     SplashScreen,
