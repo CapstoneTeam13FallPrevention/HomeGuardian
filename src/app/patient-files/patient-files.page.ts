@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Todo,TodoService} from './../services/todo.service';
 
 @Component({
   selector: 'app-patient-files',
@@ -7,24 +6,16 @@ import {Todo,TodoService} from './../services/todo.service';
   styleUrls: ['./patient-files.page.scss'],
 })
 export class PatientFilesPage implements OnInit {
-todos:Todo[];
 
 
-  constructor(private todoService:TodoService) {}
+
+  constructor() {}
   ngOnInit(){
-
-  this.todoService.getTodos().subscribe(res =>{
-      this.todos = res;
-    });
-
   }
 
 
 
-remove(item)
-  {
-  this.todoService.removeTodo(item.id);
-    }
+
 
     customActionSheetOptionsPatient: any = {
       header: 'Patient',
