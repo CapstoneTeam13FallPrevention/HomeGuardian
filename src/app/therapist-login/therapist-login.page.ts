@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AngularFireAuth } from '@angular/fire/auth';
-
 @Component({
   selector: 'app-therapist-login',
   templateUrl: './therapist-login.page.html',
@@ -9,14 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class TherapistLoginPage implements OnInit {
 
-  constructor(public afAuth: AngularFireAuth,) {
-  }
-
-  signOut() {
-    this.afAuth.auth.signOut().then(() => {
-      location.reload();
-    });
-  }
+  constructor() { }
 
   ngOnInit() {
   }

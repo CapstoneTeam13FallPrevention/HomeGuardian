@@ -15,7 +15,7 @@
 
 <ion-content padding>
 
-  <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" autocomplete="off">
       <ion-row>
         <ion-col>
           <ion-list inset>
@@ -31,7 +31,8 @@
 
             <ion-item>
                 <ion-label>Date of Birth</ion-label>
-                <ion-datetime display-format="MMM DD, YYYY"></ion-datetime>
+               
+                <ion-datetime display-format="MMM DD, YYYY" name = "date" [(ngModel)]="date"></ion-datetime>
             </ion-item>
 
             <ion-item>
@@ -44,14 +45,15 @@
       <ion-row>
         <ion-col>
           <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-          <button ion-button class="submit-btn" full type="submit"
-                  [disabled]="!loginForm.form.valid">Login
-          </button>
+          
+
+          <ion-button shape="round" fill="outline" size="large" class="submit-btn" full type="submit"
+          [disabled]="!loginForm.form.valid">Continue(Temp for Nav)</ion-button>
         </ion-col>
       </ion-row>
   </form>
 
-  <ion-button shape="round" fill="outline" size="large" href="/user-type">Continue(Temp for Nav)</ion-button>
+  <!-- <ion-button shape="round" fill="outline" size="large" href="/user-type">Continue(Temp for Nav)</ion-button> -->
 
 
 </ion-content>
