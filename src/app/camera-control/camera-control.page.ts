@@ -226,7 +226,6 @@ export class CameraControlPage implements OnInit {
 
   uploaddataInfo(imgEntry:any){
 
-
     this.storage.get('data').then((value)=>{
       var data = JSON.parse(value);
 
@@ -245,12 +244,13 @@ this.http
         (res) =>{
           console.log(res);
           if (res['success']) {
-           
+            imgEntry.upload = false;
            
             console.log("真正成功了")
-           
+            this.storage.set(STORAGE_KEY, JSON.stringify(this.images));
+            this.presentToast('File upload complete.') //Not called
           }else{
-           
+            this.presentToast('File upload fail.') //Not called
           }
     },
     response =>{
@@ -262,10 +262,6 @@ this.http
     }
   );
     });
-  
-
-
-
 
 
 
