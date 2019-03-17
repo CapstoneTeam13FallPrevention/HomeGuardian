@@ -31,13 +31,16 @@ export class UserTypePage implements OnInit {
       this.date = queryParams.date;
     })
 
-      this.storage.set('code', this. code);
-      this.storage.set('area', this.area);
-      this.storage.set('therapist', this.therapist);
-      this.storage.set('username', this.username);
-      this.storage.set('name', this.name);
-      this.storage.set('password', this.password);
-      this.storage.set('date', this.date);
+   
+      
+   
+  
+      var timestamp1:any = Date.parse(Date()); 
+      
+      var data = {code:this.code,area:this.area,therapist:this.therapist,
+        username:this.username,name:this.name,password:this.password,date:this.date,id:timestamp1};
+        this.storage.set('data', JSON.stringify(data));
+
 
     }
 
