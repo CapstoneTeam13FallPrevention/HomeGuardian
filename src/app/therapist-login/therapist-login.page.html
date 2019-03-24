@@ -19,7 +19,7 @@
 
         <ion-item>
           <ion-label>Clinic</ion-label>
-          <ion-select [interfaceOptions]="customActionSheetOptionsClinic" interface="action-sheet" placeholder="Select One">
+          <ion-select [interfaceOptions]="customActionSheetOptionsClinic" interface="action-sheet" placeholder="Select One" value="{{clinic}}">
             <ion-select-option value="UAMS">UAMS</ion-select-option>
             <ion-select-option value="NWA">NWA</ion-select-option>
           </ion-select>
@@ -27,7 +27,7 @@
 
     </ion-list>
 
-    <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" autocomplete="off">
       <ion-row>
         <ion-col>
           <ion-list inset>
@@ -45,9 +45,9 @@
       <ion-row>
         <ion-col>
           <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-          <button ion-button class="submit-btn" full type="submit"
-                  [disabled]="!loginForm.form.valid">Login
-          </button>
+
+          <ion-button shape="round" fill="outline" size="large" class="submit-btn" full type="submit"
+          [disabled]="!loginForm.form.valid">Login</ion-button>
         </ion-col>
       </ion-row>
     </form>
