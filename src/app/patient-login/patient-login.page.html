@@ -18,15 +18,15 @@
 
       <ion-item>
           <ion-label>Clinic</ion-label>
-          <ion-select [interfaceOptions]="customActionSheetOptionsClinic" interface="action-sheet" placeholder="Select One">
+          <ion-select [interfaceOptions]="customActionSheetOptionsClinic" interface="action-sheet" placeholder="Select One" value="{{area}}" class="area">
             <ion-select-option value="UAMS">UAMS</ion-select-option>
             <ion-select-option value="NWA">NWA</ion-select-option>
           </ion-select>
         </ion-item>
 
-        <ion-item>
+         <ion-item>
             <ion-label>Therapist</ion-label>
-            <ion-select [interfaceOptions]="customActionSheetOptionsTherapist" interface="action-sheet" placeholder="Select One">
+            <ion-select [interfaceOptions]="customActionSheetOptionsTherapist" interface="action-sheet" placeholder="Select One" value="{{therapist}}" class="therapist">
               <ion-select-option value="Thep1">Therapist 1</ion-select-option>
               <ion-select-option value="Thep2">Therapist 2</ion-select-option>
             </ion-select>
@@ -34,7 +34,7 @@
       
     </ion-list>
 
-      <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
+      <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" autocomplete="off">
         <ion-row>
           <ion-col>
             <ion-list inset>
@@ -48,15 +48,24 @@
         <ion-row>
           <ion-col>
             <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-            <button ion-button class="submit-btn" full type="submit"
+          
+            <!-- <button ion-button   class="submit-btn" full type="submit"
                     [disabled]="!loginForm.form.valid">Login
-            </button>
+            </button> -->
+            <ion-button shape="round" fill="outline" size="large" class="submit-btn" full type="submit"
+            [disabled]="!loginForm.form.valid">Continue(Temp for Nav)</ion-button>
           </ion-col>
         </ion-row>
       </form>
 
 
-      <ion-button shape="round" fill="outline" size="large" href="/patient-info">Continue(Temp for Nav)</ion-button>
+      <!-- <ion-button shape="round" fill="outline" size="large" href="/patient-info">Continue(Temp for Nav)</ion-button> -->
+
+      <!-- <ion-button shape="round" fill="outline" size="large" (click)="hehe()">Continue(Temp for Nav)</ion-button> -->
+  
+
+
+
 
 
 </ion-content>

@@ -7,18 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PatientFilesPage implements OnInit {
 
+  constructor() { }
 
-
-  constructor() {}
-  ngOnInit(){
+  ngOnInit() {
   }
 
-
-
-
-
-    customActionSheetOptionsPatient: any = {
-      header: 'Patient',
-      subHeader: 'Select one of your Patients'
-    }
 }

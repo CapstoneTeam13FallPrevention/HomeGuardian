@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera/ngx';
 import { ActionSheetController, ToastController, Platform, LoadingController } from '@ionic/angular';
 import { File, FileEntry } from '@ionic-native/file/ngx';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient ,HttpParams} from '@angular/common/http';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Storage } from '@ionic/storage';
 import { FilePath } from '@ionic-native/file-path/ngx';
@@ -21,6 +21,7 @@ export class CameraControlPage implements OnInit {
 
   images = [];
 
+
   constructor(private camera: Camera, private file: File, private http: HttpClient, private webview: WebView,
     private actionSheetController: ActionSheetController, private toastController: ToastController,
     private storage: Storage, private plt: Platform, private loadingController: LoadingController,
@@ -36,11 +37,11 @@ export class CameraControlPage implements OnInit {
     this.storage.get(STORAGE_KEY).then(images => {
       if (images) {
         let arr = JSON.parse(images);
-        this.images = [];
+        this.images = []
         for (let img of arr) {
-          let filePath = this.file.dataDirectory + img;
+          let filePath = this.file.dataDirectory + img.name;
           let resPath = this.pathForImage(filePath);
-          this.images.push({ name: img, path: resPath, filePath: filePath });
+          this.images.push({ name: img.name, path: resPath, filePath: filePath,upload:img.upload });
         }
       }
     });
@@ -130,22 +131,24 @@ export class CameraControlPage implements OnInit {
   updateStoredImages(name){
     this.storage.get(STORAGE_KEY).then(images => {
       let arr = JSON.parse(images);
-      if (!arr) {
-        let newImages = [name];
-        this.storage.set(STORAGE_KEY, JSON.stringify(newImages));
-      } else{
-        arr.push(name);
-        this.storage.set(STORAGE_KEY, JSON.stringify(arr));
-      }
-
       let filePath = this.file.dataDirectory + name;
       let resPath = this.pathForImage(filePath);
-
       let newEntry = {
         name: name,
         path: resPath,
-        filePath: filePath
+        filePath: filePath,
+        upload:true
       };
+
+      
+      if (!arr) {
+        let newImages = [newEntry];
+        this.storage.set(STORAGE_KEY, JSON.stringify(newImages));
+      } else{
+        arr.push(newEntry);
+        this.storage.set(STORAGE_KEY, JSON.stringify(arr));
+      }
+
 
       this.images = [newEntry, ...this.images];
       this.ref.detectChanges();
@@ -157,7 +160,7 @@ export class CameraControlPage implements OnInit {
 
     this.storage.get(STORAGE_KEY).then(images => {
       let arr = JSON.parse(images);
-      let filtered = arr.filter(name => name != imgEntry.name);
+      let filtered = arr.filter(img => img.name != imgEntry.name);
       this.storage.set(STORAGE_KEY, JSON.stringify(filtered));
 
       var correctPath = imgEntry.filePath.substr(0, imgEntry.filePath.lastIndexOf('/') + 1);
@@ -171,14 +174,14 @@ export class CameraControlPage implements OnInit {
   startUpload(imgEntry){
     this.file.resolveLocalFilesystemUrl(imgEntry.filePath)
     .then(entry => {
-      (<FileEntry>entry).file(file => this.readFile(file))
+      (<FileEntry>entry).file(file => this.readFile(file,imgEntry))
     })
     .catch(err => {
       this.presentToast('Error while reading file.');
     })
   }
 
-  readFile(file:any){
+  readFile(file:any,imgEntry:any){
     const reader = new FileReader();
     reader.onloadend = () => {
       const formData = new FormData();
@@ -186,34 +189,85 @@ export class CameraControlPage implements OnInit {
         type: file.type
       });
       formData.append('file', imgBlob, file.name);
-      this.uploadImageData(formData);
+      this.uploadImageData(formData,imgEntry);
     };
     reader.readAsArrayBuffer(file);
   }
 
-  async uploadImageData(formData: FormData){
+  async uploadImageData(formData: FormData,imgEntry:any){
     const loading = await this.loadingController.create({
       message: 'Uploading image...',
     });
     await loading.present();
-    console.log("Test Console");
-
-    this.http.post("http://localhost:8080/index.php", formData)
+   
+    this.http.post("http://localhost:8888/160063D_php/upload.php",formData)
       .pipe(
         finalize(() => {
           loading.dismiss();
-          //this.presentToast('C2'); //This is called
+        //  this.presentToast('C2'); //This is called
         })
-      ).subscribe(//res => {
-        //if (res['success']) {
-          //this.presentToast('File upload complete.') //Not called
-        //} else {
-          //this.presentToast('File upload failed.') //Not called
-        //}
+      ).subscribe(res => {
+      
+        if (res['success']) {
+
+          console.log(res);
+          this.uploaddataInfo(imgEntry);
+
+        } else {
+          console.log(res);
+         this.presentToast('File upload failed.') //Not called
+        }
         v => console.log("C3")
-      //}
+     }
       );
 
-      //this.presentToast('C1.') //This is called
+      this.presentToast('C1.') //This is called
   }
+
+  uploaddataInfo(imgEntry:any){
+
+    this.storage.get('data').then((value)=>{
+      var data = JSON.parse(value);
+
+      const params = new HttpParams()
+      .set('code', data.code)
+      .set('area', data.area)
+      .set('therapist', data.therapist)
+      .set('username', data.username)
+      .set('name', data.name)
+      .set('password', data.password)
+      .set('date', data.date)
+      .set('imageName',imgEntry.name).set('dateId',data.id);
+this.http
+      .post("http://localhost:8888/160063D_php/uploaddata.php",params)
+      .subscribe(
+        (res) =>{
+          console.log(res);
+          if (res['success']) {
+            imgEntry.upload = false;
+           
+            console.log("真正成功了")
+            this.storage.set(STORAGE_KEY, JSON.stringify(this.images));
+            this.presentToast('File upload complete.') //Not called
+          }else{
+            this.presentToast('File upload fail.') //Not called
+          }
+    },
+    response =>{
+      
+       console.log(response)
+    },
+    ()=>{
+      
+    }
+  );
+    });
+
+
+
+  }
+
+
+
+
 }
