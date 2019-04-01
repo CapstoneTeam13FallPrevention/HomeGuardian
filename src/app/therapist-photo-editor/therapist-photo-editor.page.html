@@ -10,9 +10,10 @@
     <ion-list>
       <ion-item *ngFor="let img of images; index as pos" text-wrap (click) = "tapItem(img)">
         <ion-thumbnail slot="start">
-          <ion-img [src]="img.path"></ion-img>
+          <ion-img [src]="img.imageName"></ion-img>
         </ion-thumbnail>
-        <ion-label>{{ img.name }}</ion-label>
+        <ion-label>{{ img.area }}</ion-label>
+        <ion-label>{{ img.therapist }}</ion-label>
 
         <ion-button slot = "end" fill = "clear" (click) = "startUpload(img)" [disabled]="!img.upload">
           <img src="../../assets/img/right.png" alt="Disclaimer Symbol" >

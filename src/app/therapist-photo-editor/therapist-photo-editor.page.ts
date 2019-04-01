@@ -14,7 +14,7 @@ const STORAGE_KEY = 'my_images';
 })
 export class TherapistPhotoEditorPage implements OnInit {
 
-  images = ["dd","rrrr"];
+  images = [];
 
 
   constructor(private camera: Camera, private file: File, private http: HttpClient, private webview: WebView,
@@ -23,7 +23,7 @@ export class TherapistPhotoEditorPage implements OnInit {
     private ref: ChangeDetectorRef, private filePath: FilePath) { }
 
   ngOnInit() {
-   this.uploaddataInfo();
+   this.getDataInfo();
   }
 
   pathForImage(img) {
@@ -44,51 +44,11 @@ export class TherapistPhotoEditorPage implements OnInit {
     toast.present();
   }
 
-  copyFileToLocalDir(namePath, currentName, newFileName) {
-    this.file.copyFile(namePath, currentName, this.file.dataDirectory, newFileName).then(success => {
-      this.updateStoredImages(newFileName);
-    }, error => {
-      this.presentToast('Error while storing file.');
-    });
-  }
-
-  createFileName() {
-    var d = new Date(),
-        n = d.getTime(),
-        newFileName = n + ".jpg";
-    return newFileName;
-  }
-
-  updateStoredImages(name){
-    this.storage.get(STORAGE_KEY).then(images => {
-      let arr = JSON.parse(images);
-      let filePath = this.file.dataDirectory + name;
-      let resPath = this.pathForImage(filePath);
-      let newEntry = {
-        name: name,
-        path: resPath,
-        filePath: filePath,
-        upload:true
-      };
-
-      
-      if (!arr) {
-        let newImages = [newEntry];
-        this.storage.set(STORAGE_KEY, JSON.stringify(newImages));
-      } else{
-        arr.push(newEntry);
-        this.storage.set(STORAGE_KEY, JSON.stringify(arr));
-      }
-
-
-    
-      this.ref.detectChanges();
-    });
-  }
-
+ 
+ 
 
   tapItem(imgEntry){
-    alert("wwwwwww");
+    console.log("打个广告");
   }
   
   
@@ -107,11 +67,18 @@ export class TherapistPhotoEditorPage implements OnInit {
       .post("http://localhost:8888/160063D_php/getdata.php",params)
       .subscribe(
         (res) =>{
-          console.log(res);
-          if (res['success']) {
-            
-           
-           
+         console.log("请求数据成功");
+         console.log("请求数据成功");
+          if (res['success'] == "1") {
+          
+            console.log(res["data"][0]["id"]);
+            this.images = res["data"];
+            this.images.map(item=>{
+            item.imageName = "http://localhost:8888/160063D_php/img/"+item.imageName;
+            return item;
+           });
+console.log(this.images[0]["imageName"])
+
          
           }else{
             this.presentToast('File upload fail.') //Not called
