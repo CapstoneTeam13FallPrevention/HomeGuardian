@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-therapist-login',
   templateUrl: './therapist-login.page.html',
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class TherapistLoginPage implements OnInit {
   clinic:String = "UAMS"
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, private storage: Storage) { }
 
   ngOnInit() {
   }
@@ -33,17 +33,19 @@ export class TherapistLoginPage implements OnInit {
     console.log(password);
     console.log(clinic);
     
-   
     
  //  this.router.navigateByUrl('/patient-info?code'+ code + '&area=' + this.area + '&therapist='+ this.therapist);
 
-//  this.router.navigate(['/patient-info'], {
-//    queryParams: {
-//      code: code,
-//      area: this.area,
-//      therapist:this.therapist
-//    }
-// })
+ var data = {username:username,password:password,clinic:clinic};
+  this.storage.set('threapistData', JSON.stringify(data));
+
+ this.router.navigate(['/therapist-photo-editor'], {
+   queryParams: {
+    username: username,
+    password: password,
+    clinic:clinic
+   }
+})
    }
 
 }
