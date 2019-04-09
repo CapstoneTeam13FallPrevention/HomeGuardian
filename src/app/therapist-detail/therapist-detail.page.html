@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>therapist-detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h3  text-center>Please write your tip</h3>
+  <h3  text-center>Patient：{{ image.username}}</h3>
+
+    <ion-img [src]="image.imageName"></ion-img>
+
+    <form #loginForm="ngForm" (ngSubmit)="send(loginForm)" autocomplete="off">
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
+              <ion-item>
+                  <ion-input placeholder="Please write your tip" name="tip" id="loginField"
+                              type="text" required [(ngModel)]="accesscode" #email></ion-input>
+                </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+        
+          <!-- <button ion-button   class="submit-btn" full type="submit"
+                  [disabled]="!loginForm.form.valid">Login
+          </button> -->
+          <ion-button shape="round" fill="outline" size="large" class="submit-btn" full type="submit"
+          [disabled]="!loginForm.form.valid">send</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+
+
+
+ 
+</ion-content>
+
+
+  
+

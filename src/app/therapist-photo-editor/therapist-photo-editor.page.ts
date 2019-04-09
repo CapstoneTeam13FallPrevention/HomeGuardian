@@ -6,6 +6,7 @@ import { HttpClient ,HttpParams} from '@angular/common/http';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Storage } from '@ionic/storage';
 import { FilePath } from '@ionic-native/file-path/ngx';
+import { Router } from '@angular/router';
 const STORAGE_KEY = 'my_images';
 @Component({
   selector: 'app-therapist-photo-editor',
@@ -20,7 +21,7 @@ export class TherapistPhotoEditorPage implements OnInit {
   constructor(private camera: Camera, private file: File, private http: HttpClient, private webview: WebView,
     private actionSheetController: ActionSheetController, private toastController: ToastController,
     private storage: Storage, private plt: Platform, private loadingController: LoadingController,
-    private ref: ChangeDetectorRef, private filePath: FilePath) { }
+    private ref: ChangeDetectorRef, private filePath: FilePath,public router: Router,) { }
 
   ngOnInit() {
    this.getDataInfo();
@@ -48,10 +49,19 @@ export class TherapistPhotoEditorPage implements OnInit {
  
 
   tapItem(imgEntry){
-    console.log("打个广告");
+    console.log(imgEntry.therapist);
+    this.router.navigate(['/therapist-detail'], {
+      queryParams: {
+       img: JSON.stringify(imgEntry),
+      }
+   })
+
+
+
+    
   }
   
-  
+ 
 
   getDataInfo(){
   
