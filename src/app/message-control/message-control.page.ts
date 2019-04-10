@@ -23,10 +23,10 @@ export class MessageControlPage implements OnInit {
     private storage: Storage, private plt: Platform, private loadingController: LoadingController,
     private ref: ChangeDetectorRef, private filePath: FilePath) { 
 
-      activateInfo.queryParams.subscribe(queryParams => {
-        this.image = JSON.parse(queryParams.img);
-      console.log(queryParams.img)
-      })
+      // activateInfo.queryParams.subscribe(queryParams => {
+      //   this.image = JSON.parse(queryParams.img);
+      // console.log(queryParams.img)
+      // })
 
 
     }
