@@ -9,13 +9,13 @@ import { FilePath } from '@ionic-native/file-path/ngx';
 import { NgForm } from '@angular/forms';
 const STORAGE_KEY = 'my_images';
 @Component({
-  selector: 'app-therapist-detail',
-  templateUrl: './therapist-detail.page.html',
-  styleUrls: ['./therapist-detail.page.scss'],
+  selector: 'app-message-control',
+  templateUrl: './message-control.page.html',
+  styleUrls: ['./message-control.page.scss'],
 })
-export class TherapistDetailPage implements OnInit {
+export class MessageControlPage implements OnInit {
   
-  image;
+  images = [];
 
 
   constructor(private activateInfo:ActivatedRoute, private file: File, private http: HttpClient, private webview: WebView,
@@ -32,43 +32,53 @@ export class TherapistDetailPage implements OnInit {
     }
 
   ngOnInit() {
-   
+    this.getDataInfo();
   }
 
-  send(form: NgForm) {
-     var message = form.value.tip;
-     const params = new HttpParams()
-     .set('message', message)
-     .set('ID', this.image.id);
-console.log(params)
-     this.http
-     .post("http://localhost:8888/160063D_php/updatemessage.php",params)
-     .subscribe(
-       (res) =>{
-        console.log("请求数据成功");
-        console.log("请求数据成功");
-         if (res['success'] == "1") {
-          this.presentToast('message send success.') //Not called
-          console.log(res);
+  getDataInfo(){
+  
+    this.storage.get('threapistData').then((value)=>{
+      var data = JSON.parse(value);
 
-         }else{
-           this.presentToast('message send  fail.') //Not called
-         }
-   },
-   response =>{
-     
-      console.log(response)
-   },
-   ()=>{
-     
-   }
- );
- 
+      const params = new HttpParams()
+      .set('username', data.username)
+      .set('password', data.password)
+      .set('clinic', data.clinic);
 
-    
- 
+      this.http
+      .post("http://localhost:8888/160063D_php/getdata.php",params)
+      .subscribe(
+        (res) =>{
+         console.log("请求数据成功");
+         console.log("请求数据成功");
+          if (res['success'] == "1") {
+          
+            console.log(res["data"][0]["id"]);
+            this.images = res["data"];
+            this.images.map(item=>{
+            item.imageName = "http://localhost:8888/160063D_php/img/"+item.imageName;
+            return item;
+           });
+console.log(this.images[0]["imageName"])
 
-   }
+         
+          }else{
+            this.presentToast('File upload fail.') //Not called
+          }
+    },
+    response =>{
+      
+       console.log(response)
+    },
+    ()=>{
+      
+    }
+  );
+    });
+
+
+
+  }
 
   async presentToast(text) {
     const toast = await this.toastController.create({

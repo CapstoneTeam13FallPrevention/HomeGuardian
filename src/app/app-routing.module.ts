@@ -25,8 +25,8 @@ const routes: Routes = [
   { path: 'patient-info-gallery', loadChildren: './patient-info-gallery/patient-info-gallery.module#PatientInfoGalleryPageModule' },
   { path: 'therapist-photo-editor', loadChildren: './therapist-photo-editor/therapist-photo-editor.module#TherapistPhotoEditorPageModule' },
   { path: 'therapist-detail', loadChildren: './therapist-detail/therapist-detail.module#TherapistDetailPageModule' },
-
-
+  { path: 'message-control', loadChildren: './message-control/message-control.module#MessageControlPageModule' },
+                                                                                     
 ];
 
 @NgModule({
