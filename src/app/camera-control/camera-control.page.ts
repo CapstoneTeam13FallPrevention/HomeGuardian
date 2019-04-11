@@ -204,7 +204,6 @@ export class CameraControlPage implements OnInit {
       .pipe(
         finalize(() => {
           loading.dismiss();
-        //  this.presentToast('C2'); //This is called
         })
       ).subscribe(res => {
       
@@ -215,13 +214,11 @@ export class CameraControlPage implements OnInit {
 
         } else {
           console.log(res);
-         this.presentToast('File upload failed.') //Not called
+         this.presentToast('File upload failed.')
         }
         v => console.log("C3")
      }
       );
-
-      this.presentToast('C1.') //This is called
   }
 
   uploaddataInfo(imgEntry:any){
@@ -248,9 +245,9 @@ this.http
            
             console.log("真正成功了")
             this.storage.set(STORAGE_KEY, JSON.stringify(this.images));
-            this.presentToast('File upload complete.') //Not called
+            this.presentToast('File upload complete.')
           }else{
-            this.presentToast('File upload fail.') //Not called
+            this.presentToast('File upload fail.')
           }
     },
     response =>{
